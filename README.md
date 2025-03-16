@@ -55,12 +55,23 @@ docker push crpi-j7n4vxr83yha2gn2.cn-shanghai.personal.cr.aliyuncs.com/aliyun017
 
 **Public network available**
 
-docker run -it --rm --name zhenxue-ubuntu --network host -v D:\work\meetingSummary:/data/zhenxue/meetingSummary -w /data/zhenxue/meetingSummary crpi-j7n4vxr83yha2gn2.cn-shanghai.personal.cr.aliyuncs.com/aliyun01701/mm:001
+docker run -it --rm --gpus all --name zhenxue-ubuntu --network host -v D:\work\meetingSummary:/data/zhenxue/meetingSummary -w /data/zhenxue/meetingSummary crpi-j7n4vxr83yha2gn2.cn-shanghai.personal.cr.aliyuncs.com/aliyun01701/mm:001
 
 **Public network unavailable**
 
-docker run -it --rm --name zhenxue-ubuntu --network host -v D:\work\meetingSummary:/data/zhenxue/meetingSummary -w /data/zhenxue/meetingSummary --env HTTP_PROXY="http://host.docker.internal:26561" --env HTTPS_PROXY="http://host.docker.internal:26561" crpi-j7n4vxr83yha2gn2.cn-shanghai.personal.cr.aliyuncs.com/aliyun01701/mm:001
+docker run -it --rm --gpus all --name zhenxue-ubuntu --network host -v D:\work\meetingSummary:/data/zhenxue/meetingSummary -w /data/zhenxue/meetingSummary --env HTTP_PROXY="http://host.docker.internal:26561" --env HTTPS_PROXY="http://host.docker.internal:26561" crpi-j7n4vxr83yha2gn2.cn-shanghai.personal.cr.aliyuncs.com/aliyun01701/mm:001
 
 ### Build
 
+1. from docker container
+```
+docker commit [ContainerId] crpi-j7n4vxr83yha2gn2.cn-shanghai.personal.cr.aliyuncs.com/aliyun01701/mm:001
+docker save -o xxx.tar crpi-j7n4vxr83yha2gn2.cn-shanghai.personal.cr.aliyuncs.com/aliyun01701/mm:001
+docker rmi [ContainerId]
+docker load -i ./xxx.tar
+```
+
+2. from Dockerfile
+```
 docker build -t crpi-j7n4vxr83yha2gn2.cn-shanghai.personal.cr.aliyuncs.com/aliyun01701/mm:001 .
+```
